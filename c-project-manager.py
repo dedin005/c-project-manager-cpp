@@ -11,7 +11,7 @@ def newProject(path):
     os.mkdir(path)
     os.mkdir(f"{path}/src")
 
-    with open(f"{templates_folder}/main-template.c", "r") as templateFile, open(f"{path}/src/main.c", "w+") as outFile:
+    with open(f"{templates_folder}/main-template.cpp", "r") as templateFile, open(f"{path}/src/main.cpp", "w+") as outFile:
         for line in templateFile:
             outFile.write(line)
     
@@ -30,7 +30,7 @@ def updateProject(path):
 
     for root, dirs, files in os.walk(f"{path}/src"):
         for file in files:
-            if(Path(file).suffix == ".c"):
+            if(Path(file).suffix == ".cpp"):
                 code_files.append(f"{PurePosixPath(root).relative_to(path / 'src')}/{file.rsplit('.', 1)[0]}".lstrip("./"))
 
     with open(f"{path}/Makefile","r") as makefile:
@@ -41,9 +41,9 @@ def updateProject(path):
             if line.startswith("SRCFILES"):
                 line = line.strip() + " "
                 for file in code_files:
-                    if "$(SRCFOLDER)/" + file + ".c" not in line:
-                        line = line + " $(SRCFOLDER)/" + file + ".c"
-                        print(f"Found new source file: {file}.c")
+                    if "$(SRCFOLDER)/" + file + ".cpp" not in line:
+                        line = line + " $(SRCFOLDER)/" + file + ".cpp"
+                        print(f"Found new source file: {file}.cpp")
                         changes = True
                 line = line + '\n'
             if line.startswith("OBJFILES"):
@@ -66,7 +66,7 @@ def updateProject(path):
 def addSource(path, filename):
     os.makedirs(os.path.dirname(f"{path}/src/{filename}"), exist_ok=True)
     safeFileName = filename.replace("/","_")
-    with open(f"{templates_folder}/source-template.c", "r") as templateFile, open(f"{path}/src/{filename}.c", "w+") as outFile:
+    with open(f"{templates_folder}/source-template.cpp", "r") as templateFile, open(f"{path}/src/{filename}.cpp", "w+") as outFile:
         for line in templateFile:
             line = line.replace("header-template.h",f"{os.path.basename(filename)}.h")
             outFile.write(line)   
