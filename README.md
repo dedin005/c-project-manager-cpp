@@ -1,11 +1,11 @@
-# c-project-manager
+# c-project-manager-cpp
 
-Create c projects, add source files, and update your makefile automatically with this tool
+Create cpp projects, add source files, and update your makefile automatically with this tool
 
-`c-project-manager.py` scans for new .c/.h files and updates the makefile for the c project in the current directory
-`c-project-manager.py test` scans for new .c/.h files and updates the makefile for the c project in the `test` directory
-`c-project-manager.py --new test` creates a new c project in the `test` directory
-`c-project-manager.py --add code` creates code.c and code.h within the src directory of the c project in the current directory and updates the makefile
+`c-project-manager-cpp.py` scans for new .cpp/.h files and updates the makefile for the c project in the current directory
+`c-project-manager-cpp.py test` scans for new .cpp/.h files and updates the makefile for the c project in the `test` directory
+`c-project-manager-cpp.py --new test` creates a new c++ project in the `test` directory
+`c-project-manager-cpp.py --add code` creates code.cpp and code.h within the src directory of the c project in the current directory and updates the makefile
 
 Makefile commands
 `make` builds the project using optimized settings
